@@ -1,0 +1,23 @@
+artifact_path: file:///D:/Programming/Learning/Krish Naik Course/9 ML Flow/mlruns/0/models/m-1bf211fa254842be936d719e841ecc72/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.11.15
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.17.0
+model_id: m-1bf211fa254842be936d719e841ecc72
+model_size_bytes: 11280
+model_uuid: m-1bf211fa254842be936d719e841ecc72
+prompts: null
+run_id: 9b3d6a4ede294375b3b5cd709892e2a3
+utc_time_created: '2026-10-14 12:04:24.300179'
