@@ -5,7 +5,7 @@
 import os
 import warnings
 import sys
-
+import dagshub
 import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -33,6 +33,12 @@ if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(40)
 
+    dagshub.init(
+        repo_owner="parthraorane86",
+        repo_name="mlflow-exp1",
+        mlflow=True
+    )
+    
     # Read the wine-quality csv file from the URL
     csv_url = (
         "https://raw.githubusercontent.com/mlflow/mlflow/master/tests/datasets/winequality-red.csv"
@@ -53,11 +59,11 @@ if __name__ == "__main__":
     train_y = train[["quality"]]
     test_y = test[["quality"]]
 
-    # alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
-    # l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
+    alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
+    l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
     
-    alpha = 0.3
-    l1_ratio = 0.8
+    # alpha = 0.3
+    # l1_ratio = 0.8
 
     with mlflow.start_run():
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
@@ -82,9 +88,6 @@ if __name__ == "__main__":
         signature = infer_signature(train_x, predictions)
 
         ## For Remote server only(DAGShub)
-
-        # remote_server_uri="https://dagshub.com/krishnaik06/mlflowexperiments.mlflow"
-        # mlflow.set_tracking_uri(remote_server_uri)
 
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
